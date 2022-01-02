@@ -1,0 +1,55 @@
+﻿@page "/register"
+
+<PageTitle>Customer Creation</PageTitle>
+<EditForm Model="@model">
+    <h1>Customer Creation</h1>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Gender</label>
+    </div>
+    <div class="mb-3">
+        <InputRadioGroup @bind-Value="model.GenderId">
+            @foreach (var item in genders)
+            {
+                <div class="form-check form-check-inline">
+                    <InputRadio class="form-check-input" Value="item.Id" />
+                    <label class="form-check-label">@item.Name</label>
+                </div>
+            }
+        </InputRadioGroup>
+    </div>
+    <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <InputSelect class="form-select" aria-label="Default select example" @bind-Value="model.CustomerId">
+            <option value="0" selected>Choose Country</option>
+            @foreach(var item in countries){
+            <option value="@item.Id">@item.Name</option>
+            }
+            
+        </InputSelect>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Mailing Address</label>
+        <textarea class="form-control" rows="3"></textarea>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" @bind-value="model.IsAgreeToGetPromotionalEmail" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Are you agree to receive promotional email?
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
