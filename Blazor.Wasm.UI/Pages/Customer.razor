@@ -33,10 +33,11 @@
         <label for="country" class="form-label">Country</label>
         <InputSelect class="form-select" aria-label="Default select example" @bind-Value="model.CustomerId">
             <option value="0" selected>Choose Country</option>
-            @foreach(var item in countries){
-            <option value="@item.Id">@item.Name</option>
+            @foreach (var item in countries)
+            {
+                <option value="@item.Id">@item.Name</option>
             }
-            
+
         </InputSelect>
     </div>
     <div class="mb-3">
@@ -44,12 +45,11 @@
         <textarea class="form-control" rows="3"></textarea>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" @bind-value="model.IsAgreeToGetPromotionalEmail" id="flexCheckDefault">
+        <input class="form-check-input" type="checkbox" @bind-value="model.IsAgreeToGetPromotionalEmail"  id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
-            Are you agree to receive promotional email?
+           Are you agree to receive promotional email? @model.IsAgreeToGetPromotionalEmail
         </label>
     </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
 </EditForm>
 
