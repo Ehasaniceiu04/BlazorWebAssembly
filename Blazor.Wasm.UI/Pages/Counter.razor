@@ -1,0 +1,18 @@
+﻿@page "/counter"
+@page "/counter/{currentCount:int}"
+<h3>Counter:@currentCount</h3>
+
+ <button type="submit" class="btn btn-primary" @onclick="GoToHome">Navigate to Home</button>
+
+@code {
+    [Parameter]
+    public int currentCount { get; set; } = 0;
+
+    [Inject]
+    private NavigationManager navigationManager{ get; set; }
+
+    void GoToHome()
+    {
+        this.navigationManager.NavigateTo("/");
+    }
+}
