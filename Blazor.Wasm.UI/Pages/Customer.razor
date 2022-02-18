@@ -1,25 +1,36 @@
 ﻿@page "/register"
 
 <PageTitle>Customer Creation</PageTitle>
-<EditForm Model="@model">
+<EditForm Model="@customerModel" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit" >
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+   
     <h1>Customer Creation</h1>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="firstName" @bind-value="customerModel.FirstName">
+        <div class="form-massage">
+            <ValidationMessage For="@(() => customerModel.FirstName)" />
+        </div>
     </div>
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="exampleInputPassword1">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lastName" @bind-value="customerModel.LastName">
+        <div class="form-massage">
+            <ValidationMessage For="@(() => customerModel.LastName)" />
+        </div>
     </div>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email Address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" @bind-value="customerModel.Email">
+        <div class="form-massage">
+            <ValidationMessage For="@(() => customerModel.Email)" />
+        </div>
     </div>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Gender</label>
+        <label for="gender" class="form-label">Gender</label>
     </div>
     <div class="mb-3">
-        <InputRadioGroup @bind-Value="model.GenderId">
+        <InputRadioGroup @bind-Value="customerModel.GenderId">
             @foreach (var item in genders)
             {
                 <div class="form-check form-check-inline">
@@ -28,10 +39,13 @@
                 </div>
             }
         </InputRadioGroup>
+         <div class="form-massage">
+            <ValidationMessage For="@(() => customerModel.GenderId)" />
+        </div>
     </div>
     <div class="mb-3">
         <label for="country" class="form-label">Country</label>
-        <InputSelect class="form-select" aria-label="Default select example" @bind-Value="model.CustomerId">
+        <InputSelect class="form-select" aria-label="Default select example" @bind-Value="customerModel.CountryId">
             <option value="0" selected>Choose Country</option>
             @foreach (var item in countries)
             {
@@ -41,13 +55,13 @@
         </InputSelect>
     </div>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Mailing Address</label>
+        <label for="country" class="form-label">Mailing Address</label>
         <textarea class="form-control" rows="3"></textarea>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" @bind-value="model.IsAgreeToGetPromotionalEmail"  id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-           Are you agree to receive promotional email? @model.IsAgreeToGetPromotionalEmail
+        <input class="form-check-input" type="checkbox" id="isAgreeToGetPromotionalEmail" @bind-value="customerModel.IsAgreeToGetPromotionalEmail">
+        <label class="form-check-label" for="isAgreeToGetPromotionalEmail">
+            Are you agree to receive promotional email?
         </label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
