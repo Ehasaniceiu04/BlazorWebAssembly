@@ -7,6 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CustomerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Customer.Sql")));
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DevCorsPolicy", builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("DevCorsPolicy");
 
 app.UseHttpsRedirection();
 

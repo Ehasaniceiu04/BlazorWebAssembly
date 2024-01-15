@@ -3,6 +3,7 @@ using Blazor.WASM.API.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blazor.WASM.API.Migrations
 {
     [DbContext(typeof(CustomerDbContext))]
-    partial class CustomerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240115184717_mailing address")]
+    partial class mailingaddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

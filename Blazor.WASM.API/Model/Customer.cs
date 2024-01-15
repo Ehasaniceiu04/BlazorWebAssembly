@@ -10,7 +10,7 @@
         public int GenderId { get; set; }
 
         public int CountryId { get; set; }
-        public string MailingAddress { get; set; }
+        public string? MailingAddress { get; set; }
 
         public bool IsSubscribedToNewsLetter { get; set; }
     }
