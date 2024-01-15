@@ -26,9 +26,9 @@ namespace Blazor.Wasm.UI.Models
         public int CountryId { get; set; }
         public string MailingAddress { get; set; }
 
-        [Required(ErrorMessage = "IsAgreeToGetPromotionalEmail is required")]
+        [Required(ErrorMessage = "IsSubscribedToNewsLetter is required")]
         [Range(typeof(bool), "true", "true", ErrorMessage = "From submission disallows for false")]
-        public bool IsAgreeToGetPromotionalEmail { get; set; }
+        public bool IsSubscribedToNewsLetter { get; set; }
 
 
     }

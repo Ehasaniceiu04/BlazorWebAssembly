@@ -55,11 +55,11 @@
         </InputSelect>
     </div>
     <div class="mb-3">
-        <label for="country" class="form-label">Mailing Address</label>
-        <textarea class="form-control" rows="3"></textarea>
+        <label for="country" class="form-label"> Address</label>
+        <textarea id="mailing" class="form-control" rows="3"  ></textarea>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="isAgreeToGetPromotionalEmail" @bind-value="customerModel.IsAgreeToGetPromotionalEmail">
+        <input class="form-check-input" type="checkbox" id="isAgreeToGetPromotionalEmail" @bind-value="customerModel.IsSubscribedToNewsLetter">
         <label class="form-check-label" for="isAgreeToGetPromotionalEmail">
             Are you agree to receive promotional email?
         </label>
