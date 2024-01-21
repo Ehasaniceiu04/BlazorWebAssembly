@@ -9,7 +9,9 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMatBlazor();
-builder.Services.AddHttpClient<System.Net.Http.HttpClient>(options => options.BaseAddress =new Uri("https://localhost:7253/"));
+builder.Services.AddHttpClient("Blazor.WASM.API", options => options.BaseAddress =new Uri("https://localhost:7253/"));
+
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Blazor.WASM.API"));
 builder.Services.AddMatToaster(config =>
 {
     config.Position = MatToastPosition.BottomRight;
