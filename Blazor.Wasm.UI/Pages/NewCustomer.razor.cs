@@ -9,7 +9,7 @@ using System.Net.Http.Json;
 
 namespace Blazor.Wasm.UI.Pages
 {
-    public partial class Customer
+    public partial class NewCustomer
     {
         [Inject]
         private HttpClient Http { get; set; }
