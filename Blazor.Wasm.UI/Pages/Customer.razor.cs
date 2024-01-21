@@ -1,11 +1,18 @@
 ﻿using Blazor.Wasm.UI.Models;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using System.Net.Http.Json;
+
+
+
+
 
 namespace Blazor.Wasm.UI.Pages
 {
     public partial class Customer
     {
+        [Inject]
+        private HttpClient Http { get; set; }
         [Inject]
         IMatToaster Toaster { get; set; }
 
@@ -17,19 +24,25 @@ namespace Blazor.Wasm.UI.Pages
               new GenderModel(){Id = 3, Name ="Other"},
         };
 
-        List<CountryModel> countries = new List<CountryModel>() { 
+        List<CountryModel> countries = new List<CountryModel>() {
             new CountryModel(){Id = 1, Name ="USA" },
             new CountryModel(){Id = 2, Name ="Bangladesh"},
              new CountryModel(){Id = 3, Name ="Nepal"},
              new CountryModel(){Id = 4, Name ="India"}
         };
-        void HandleInvalidSubmit()
+
+        async void HandleValidSubmit()
         {
-            this.Toaster.Add("Form submitted with invalid fields", MatToastType.Success, "Customer Creation");
-        }
-        void HandleValidSubmit()
-        {
-            this.Toaster.Add("Form submitted with valid fields", MatToastType.Success, "Customer Creation");
+            try
+            {
+                await Http.PostAsJsonAsync<CustomerModel>("api/customer", customerModel);
+                this.Toaster.Add("customer created successfully", MatToastType.Success, "Customer Creation");
+            }
+            catch (Exception ex)
+            {
+                this.Toaster.Add(ex.Message, MatToastType.Danger, "Customer Creation");
+            }
+            ;
         }
     }
 }
