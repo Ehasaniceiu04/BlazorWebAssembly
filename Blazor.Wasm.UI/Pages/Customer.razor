@@ -1,0 +1,26 @@
+﻿@page "/customers"
+<h3>Customer</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in customers){
+        <tr>
+            <th scope="row">@item.Id</th>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.Email</td>
+            <td>@item.GenderId</td>
+
+        </tr>
+        }
+       
+    </tbody>
+</table>

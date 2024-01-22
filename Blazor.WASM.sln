@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Wasm.UI", "Blazor.Wasm.UI\Blazor.Wasm.UI.csproj", "{61BF7BF3-135F-409E-885B-399B2CF6EE99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.WASM.API", "Blazor.WASM.API\Blazor.WASM.API.csproj", "{CB18605F-0CFB-48B7-8BC3-94C01B44EC51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.WASM.API", "Blazor.WASM.API\Blazor.WASM.API.csproj", "{CB18605F-0CFB-48B7-8BC3-94C01B44EC51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
