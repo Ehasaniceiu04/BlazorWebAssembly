@@ -12,14 +12,8 @@
     </thead>
     <tbody>
         @foreach(var item in customers){
-        <tr>
-            <th scope="row">@item.Id</th>
-            <td>@item.FirstName</td>
-            <td>@item.LastName</td>
-            <td>@item.Email</td>
-            <td>@item.GenderId</td>
-
-        </tr>
+            <DisplayCustomer customer="@item"></DisplayCustomer>
+        
         }
        
     </tbody>
