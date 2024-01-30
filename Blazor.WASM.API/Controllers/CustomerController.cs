@@ -41,5 +41,17 @@ namespace Blazor.WASM.API.Controllers
             await _context.SaveChangesAsync();
             return Ok(model);
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+             _context.Customers.Remove(customer);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
