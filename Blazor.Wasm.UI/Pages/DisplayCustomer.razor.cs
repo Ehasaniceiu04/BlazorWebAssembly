@@ -6,7 +6,8 @@ namespace Blazor.Wasm.UI.Pages
 {
     public partial class DisplayCustomer
     {
-
+        [Parameter]
+        public EventCallback<int> OnDelete { get; set; }
         [Parameter]
         public CustomerModel customer { get;set; } = new CustomerModel();
 
@@ -20,6 +21,8 @@ namespace Blazor.Wasm.UI.Pages
         {
             await Http.DeleteAsync($"api/Customer/{customerId}");
             Toaster.Add($"Customer  deleted", MatToastType.Success);
+            await OnDelete.InvokeAsync(customerId);
+      
         }
     }
 }

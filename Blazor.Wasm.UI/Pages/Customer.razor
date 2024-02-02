@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         @foreach(var item in customers){
-            <DisplayCustomer customer="@item"></DisplayCustomer>
+            <DisplayCustomer OnDelete="@(customerId=>Reload(customerId))" customer="@item"></DisplayCustomer>
         
         }
        

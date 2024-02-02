@@ -20,5 +20,10 @@ namespace Blazor.Wasm.UI.Pages
             this.customers = await Http.GetFromJsonAsync<List<CustomerModel>>("api/Customer");
         }
 
+        private async Task Reload(int customerId)
+        {
+            this.customers =customers.Where(x => x.Id != customerId).ToList();
+        }
+
     }
 }
