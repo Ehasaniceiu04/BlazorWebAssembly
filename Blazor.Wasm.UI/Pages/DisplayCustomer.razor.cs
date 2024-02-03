@@ -17,12 +17,24 @@ namespace Blazor.Wasm.UI.Pages
         [Inject]
         HttpClient Http { get; set; }
 
-        public async Task OnHandleDelete(int customerId)
+        [Inject]
+
+        IMatDialogService MatDialogService { get; set; }
+
+        public async Task OnHandleDelete(CustomerModel customer)
         {
-            await Http.DeleteAsync($"api/Customer/{customerId}");
-            Toaster.Add($"Customer  deleted", MatToastType.Success);
-            await OnDelete.InvokeAsync(customerId);
-      
+            if (!customer.HasOrder)
+            {
+                await Http.DeleteAsync($"api/Customer/{customer.Id}");
+                Toaster.Add($"Customer  deleted", MatToastType.Success);
+                await OnDelete.InvokeAsync(customer.Id);
+            }
+            else
+            {
+                await MatDialogService.AlertAsync($"Customer has orders and cannot be deleted");
+                //  Toaster.Add($"Customer has orders and cannot be deleted", MatToastType.Warning);
+            }
+            
         }
     }
 }
