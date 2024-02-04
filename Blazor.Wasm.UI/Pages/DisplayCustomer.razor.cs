@@ -1,4 +1,5 @@
 ﻿using Blazor.Wasm.UI.Models;
+using Blazor.Wasm.UI.Pages.Shared;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 
@@ -31,7 +32,15 @@ namespace Blazor.Wasm.UI.Pages
             }
             else
             {
-                await MatDialogService.AlertAsync($"Customer has orders and cannot be deleted");
+                //await MatDialogService.AlertAsync($"Customer has orders and cannot be deleted")
+                MatDialogOptions options = new MatDialogOptions() {
+                    Attributes= new Dictionary<string, object> { 
+                        { "Message", "Customer has orders and cannot be deleted" },
+                        { "Title", "Delete Action" },
+                        { "OkText", "Acknowledge" }
+                    },
+                };
+                await MatDialogService.OpenAsync(typeof(AlertDialog),options);
             }
             
         }
