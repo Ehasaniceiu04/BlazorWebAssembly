@@ -32,7 +32,6 @@ namespace Blazor.Wasm.UI.Pages
             else
             {
                 await MatDialogService.AlertAsync($"Customer has orders and cannot be deleted");
-                //  Toaster.Add($"Customer has orders and cannot be deleted", MatToastType.Warning);
             }
             
         }
