@@ -30,7 +30,7 @@ namespace Blazor.Wasm.UI.Models
         [Range(typeof(bool), "true", "true", ErrorMessage = "From submission disallows for false")]
         public bool IsSubscribedToNewsLetter { get; set; }
 
-        public bool HasOrder { get {  return true; } }
+        public bool HasOrder { get {  return false; } }
 
 
     }

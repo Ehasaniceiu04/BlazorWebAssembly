@@ -10,7 +10,7 @@ namespace Blazor.Wasm.UI.Pages
         [Parameter]
         public EventCallback<int> OnDelete { get; set; }
         [Parameter]
-        public CustomerModel customer { get;set; } = new CustomerModel();
+        public CustomerModel customer { get; set; } = new CustomerModel();
 
         [Inject]
         IMatToaster Toaster { get; set; }
@@ -26,23 +26,29 @@ namespace Blazor.Wasm.UI.Pages
         {
             if (!customer.HasOrder)
             {
-                await Http.DeleteAsync($"api/Customer/{customer.Id}");
-                Toaster.Add($"Customer  deleted", MatToastType.Success);
-                await OnDelete.InvokeAsync(customer.Id);
+                var isConfirmed = await MatDialogService.ConfirmAsync("Are you sure you want to delete this customer?");
+                if (isConfirmed)
+                {
+                    await Http.DeleteAsync($"api/Customer/{customer.Id}");
+                    Toaster.Add($"Customer  deleted", MatToastType.Success);
+                    await OnDelete.InvokeAsync(customer.Id);
+                }  
+
             }
             else
             {
                 //await MatDialogService.AlertAsync($"Customer has orders and cannot be deleted")
-                MatDialogOptions options = new MatDialogOptions() {
-                    Attributes= new Dictionary<string, object> { 
+                MatDialogOptions options = new MatDialogOptions()
+                {
+                    Attributes = new Dictionary<string, object> {
                         { "Message", "Customer has orders and cannot be deleted" },
                         { "Title", "Delete Action" },
                         { "OkText", "Acknowledge" }
                     },
                 };
-                await MatDialogService.OpenAsync(typeof(AlertDialog),options);
+                await MatDialogService.OpenAsync(typeof(AlertDialog), options);
             }
-            
+
         }
     }
 }
