@@ -37,7 +37,6 @@ namespace Blazor.Wasm.UI.Pages
             }
             else
             {
-                //await MatDialogService.AlertAsync($"Customer has orders and cannot be deleted")
                 MatDialogOptions options = new MatDialogOptions()
                 {
                     Attributes = new Dictionary<string, object> {
