@@ -26,8 +26,16 @@ namespace Blazor.Wasm.UI.Pages
         {
             if (!customer.HasOrder)
             {
-                var isConfirmed = await MatDialogService.ConfirmAsync("Are you sure you want to delete this customer?");
-                if (isConfirmed)
+                MatDialogOptions options = new MatDialogOptions();
+                options.Attributes=new Dictionary<string, object>
+                {
+                    { "Title", "Delete Action?" },
+                    { "Message", "Are you sure you want to delete this customer?" },
+                    { "OkText", "Yes, Delete" },
+                    { "CancelText", "No, Thanks" }
+                };
+                var isConfirmed = await MatDialogService.OpenAsync(typeof(ConfirmationDialog),options);
+                if ((bool)isConfirmed)
                 {
                     await Http.DeleteAsync($"api/Customer/{customer.Id}");
                     Toaster.Add($"Customer  deleted", MatToastType.Success);
