@@ -1,5 +1,8 @@
 ﻿@page "/customers"
-<h3>Customer</h3>
+<div class="d-flex">
+    <h4 class="flex-grow-1">Customers</h4>
+    <button class="btn btn-primary">Create</button>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -14,8 +17,6 @@
     <tbody>
         @foreach(var item in customers){
             <DisplayCustomer OnDelete="@(customerId=>Reload(customerId))" customer="@item"></DisplayCustomer>
-        
-        }
-       
+        } 
     </tbody>
 </table>
