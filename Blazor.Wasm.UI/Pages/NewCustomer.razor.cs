@@ -11,6 +11,7 @@ namespace Blazor.Wasm.UI.Pages
 {
     public partial class NewCustomer
     {
+        bool dialogIsOpen = false;
         [Inject]
         private HttpClient Http { get; set; }
         [Inject]

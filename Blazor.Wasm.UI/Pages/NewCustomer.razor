@@ -1,69 +1,75 @@
-﻿@page "/register"
-
-<PageTitle>New Customer</PageTitle>
-<EditForm Model="@customerModel" OnValidSubmit="@HandleValidSubmit" >
-    <DataAnnotationsValidator></DataAnnotationsValidator>
-   
-    <h1>New Customer </h1>
-    <div class="mb-3">
-        <label for="firstName" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="firstName" @bind-value="customerModel.FirstName">
-        <div class="form-massage">
-            <ValidationMessage For="@(() => customerModel.FirstName)" />
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="lastName" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="lastName" @bind-value="customerModel.LastName">
-        <div class="form-massage">
-            <ValidationMessage For="@(() => customerModel.LastName)" />
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control" id="email" @bind-value="customerModel.Email">
-        <div class="form-massage">
-            <ValidationMessage For="@(() => customerModel.Email)" />
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="gender" class="form-label">Gender</label>
-    </div>
-    <div class="mb-3">
-        <InputRadioGroup @bind-Value="customerModel.GenderId">
-            @foreach (var item in genders)
-            {
-                <div class="form-check form-check-inline">
-                    <InputRadio class="form-check-input" Value="item.Id" />
-                    <label class="form-check-label">@item.Name</label>
+﻿<MatDialog @bind-IsOpen="@dialogIsOpen">
+    <MatDialogTitle>New Customer</MatDialogTitle>
+    <MatDialogContent>
+        <EditForm Model="@customerModel" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" @bind-value="customerModel.FirstName">
+                <div class="form-massage">
+                    <ValidationMessage For="@(() => customerModel.FirstName)" />
                 </div>
-            }
-        </InputRadioGroup>
-         <div class="form-massage">
-            <ValidationMessage For="@(() => customerModel.GenderId)" />
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="country" class="form-label">Country</label>
-        <InputSelect class="form-select" aria-label="Default select example" @bind-Value="customerModel.CountryId">
-            <option value="0" selected>Choose Country</option>
-            @foreach (var item in countries)
-            {
-                <option value="@item.Id">@item.Name</option>
-            }
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" @bind-value="customerModel.LastName">
+                <div class="form-massage">
+                    <ValidationMessage For="@(() => customerModel.LastName)" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" @bind-value="customerModel.Email">
+                <div class="form-massage">
+                    <ValidationMessage For="@(() => customerModel.Email)" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+            </div>
+            <div class="mb-3">
+                <InputRadioGroup @bind-Value="customerModel.GenderId">
+                    @foreach (var item in genders)
+                    {
+                        <div class="form-check form-check-inline">
+                            <InputRadio class="form-check-input" Value="item.Id" />
+                            <label class="form-check-label">@item.Name</label>
+                        </div>
+                    }
+                </InputRadioGroup>
+                <div class="form-massage">
+                    <ValidationMessage For="@(() => customerModel.GenderId)" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <InputSelect class="form-select" aria-label="Default select example" @bind-Value="customerModel.CountryId">
+                    <option value="0" selected>Choose Country</option>
+                    @foreach (var item in countries)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
 
-        </InputSelect>
-    </div>
-    <div class="mb-3">
-        <label for="country" class="form-label"> Address</label>
-        <textarea id="mailing" class="form-control" rows="3"  ></textarea>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="isAgreeToGetPromotionalEmail" @bind-value="customerModel.IsSubscribedToNewsLetter">
-        <label class="form-check-label" for="isAgreeToGetPromotionalEmail">
-            Are you agree to receive promotional email?
-        </label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</EditForm>
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label"> Address</label>
+                <textarea id="mailing" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="isAgreeToGetPromotionalEmail" @bind-value="customerModel.IsSubscribedToNewsLetter">
+                <label class="form-check-label" for="isAgreeToGetPromotionalEmail">
+                    Are you agree to receive promotional email?
+                </label>
+            </div>
+
+        </EditForm>
+
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { dialogIsOpen = false; })">No Thanks</MatButton>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </MatDialogActions>
+</MatDialog>
+
 

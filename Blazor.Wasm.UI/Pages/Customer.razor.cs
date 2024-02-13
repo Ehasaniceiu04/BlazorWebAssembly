@@ -7,6 +7,7 @@ namespace Blazor.Wasm.UI.Pages
 {
     public partial class Customer : ComponentBase
     {
+        private NewCustomer newCustomer;
         List<CustomerModel> customers = new List<CustomerModel>();
 
         [Inject]

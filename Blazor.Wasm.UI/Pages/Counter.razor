@@ -1,10 +1,13 @@
 ﻿@page "/counter"
-@page "/counter/{currentCount:int}"
-<h3>Counter:@currentCount</h3>
 
- <button type="submit" class="btn btn-primary" @onclick="GoToHome">Navigate to Home</button>
+<ChildCounter @ref="childCounter"></ChildCounter>
+
+ <button type="button" class="btn btn-primary" @onclick="HandleClick" >Count</button>
 
 @code {
+
+    ChildCounter childCounter { get; set; }
+
     [Parameter]
     public int currentCount { get; set; } = 0;
 
@@ -15,4 +18,12 @@
     {
         this.navigationManager.NavigateTo("/");
     }
+
+    private void HandleClick()
+    {
+        childCounter.IncrementCount();
+    }
+
+    
+   
 }
