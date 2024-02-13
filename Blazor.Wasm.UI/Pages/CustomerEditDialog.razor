@@ -1,8 +1,9 @@
-﻿<MatDialog @bind-IsOpen="@dialogIsOpen">
-    <MatDialogTitle>New Customer</MatDialogTitle>
-    <MatDialogContent>
-        <EditForm Model="@customerModel" OnValidSubmit="@HandleValidSubmit">
-            <DataAnnotationsValidator></DataAnnotationsValidator>
+﻿
+<EditForm Model="@customerModel" OnValidSubmit="@HandleValidSubmit" >
+<MatDialog @bind-IsOpen="@dialogIsOpen" Style="width:1200px !important">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <MatDialogTitle>New Customer</MatDialogTitle>
+        <MatDialogContent>
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="firstName" @bind-value="customerModel.FirstName">
@@ -63,13 +64,12 @@
                 </label>
             </div>
 
-        </EditForm>
 
-    </MatDialogContent>
-    <MatDialogActions>
-        <MatButton OnClick="@(e => { dialogIsOpen = false; })">No Thanks</MatButton>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </MatDialogActions>
-</MatDialog>
-
+        </MatDialogContent>
+        <MatDialogActions>
+            <MatButton Type="button" OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </MatDialogActions>
+    </MatDialog> 
+</EditForm>
 

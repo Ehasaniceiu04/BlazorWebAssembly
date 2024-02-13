@@ -7,7 +7,7 @@ namespace Blazor.Wasm.UI.Pages
 {
     public partial class Customer : ComponentBase
     {
-        private NewCustomer newCustomer;
+
         List<CustomerModel> customers = new List<CustomerModel>();
 
         [Inject]
@@ -24,6 +24,16 @@ namespace Blazor.Wasm.UI.Pages
         private async Task Reload(int customerId)
         {
             this.customers =customers.Where(x => x.Id != customerId).ToList();
+        }
+
+        private CustomerEditDialog customerDialog;
+        private void HandleCustomerCreate()
+        {
+            customerDialog.OpenDialog();
+        }
+        private async Task HandleCustomerUpdated()
+        {
+            this.customers = await Http.GetFromJsonAsync<List<CustomerModel>>("api/Customer");
         }
 
     }

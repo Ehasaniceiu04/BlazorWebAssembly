@@ -9,13 +9,18 @@ using System.Net.Http.Json;
 
 namespace Blazor.Wasm.UI.Pages
 {
-    public partial class NewCustomer
+    public partial class CustomerEditDialog
     {
+        [Parameter]
+        public EventCallback OnCustomerUpdated { get; set; }
+
         bool dialogIsOpen = false;
         [Inject]
         private HttpClient Http { get; set; }
         [Inject]
         IMatToaster Toaster { get; set; }
+
+
 
         CustomerModel customerModel = new CustomerModel();
 
@@ -32,12 +37,21 @@ namespace Blazor.Wasm.UI.Pages
              new CountryModel(){Id = 4, Name ="India"}
         };
 
+        public void OpenDialog()
+        {
+            dialogIsOpen = true;
+            StateHasChanged();
+        }
+
         async void HandleValidSubmit()
         {
             try
             {
                 await Http.PostAsJsonAsync<CustomerModel>("api/customer", customerModel);
                 this.Toaster.Add("customer created successfully", MatToastType.Success, "Customer Creation");
+                this.dialogIsOpen = false;
+                await OnCustomerUpdated.InvokeAsync();
+                StateHasChanged();
             }
             catch (Exception ex)
             {
@@ -45,5 +59,6 @@ namespace Blazor.Wasm.UI.Pages
             }
             ;
         }
+        
     }
 }
