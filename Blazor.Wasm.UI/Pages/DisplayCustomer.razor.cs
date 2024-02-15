@@ -9,6 +9,11 @@ namespace Blazor.Wasm.UI.Pages
     {
         [Parameter]
         public EventCallback<int> OnDelete { get; set; }
+
+        [Parameter]
+        public EventCallback<CustomerModel> OnEdit { get; set; }
+
+
         [Parameter]
         public CustomerModel customer { get; set; } = new CustomerModel();
 
@@ -57,5 +62,13 @@ namespace Blazor.Wasm.UI.Pages
             }
 
         }
+        private  async Task OnHandleEdit(CustomerModel customer) { 
+             await OnEdit.InvokeAsync(customer);
+        }
+
+
+
+
+
     }
 }

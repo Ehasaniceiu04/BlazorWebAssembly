@@ -2,7 +2,7 @@
 <EditForm Model="@customerModel" OnValidSubmit="@HandleValidSubmit" >
 <MatDialog @bind-IsOpen="@dialogIsOpen" Style="width:1200px !important">
         <DataAnnotationsValidator></DataAnnotationsValidator>
-        <MatDialogTitle>New Customer</MatDialogTitle>
+        <MatDialogTitle>@(customerModel.Id == 0 ? "New Customer" : "Update Customer")</MatDialogTitle>
         <MatDialogContent>
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>

@@ -16,7 +16,7 @@
     </thead>
     <tbody>
         @foreach(var item in customers){
-            <DisplayCustomer OnDelete="@(customerId=>Reload(customerId))" customer="@item"></DisplayCustomer>
+            <DisplayCustomer OnDelete="@(customerId=>Reload(customerId))" OnEdit="@OnHandleEdit" customer="@item" ></DisplayCustomer>
         } 
     </tbody>
 </table>

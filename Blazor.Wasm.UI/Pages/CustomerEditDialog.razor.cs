@@ -37,8 +37,9 @@ namespace Blazor.Wasm.UI.Pages
              new CountryModel(){Id = 4, Name ="India"}
         };
 
-        public void OpenDialog()
+        public void OpenDialog(CustomerModel customer)
         {
+            this.customerModel = customer;
             dialogIsOpen = true;
             StateHasChanged();
         }
@@ -47,8 +48,16 @@ namespace Blazor.Wasm.UI.Pages
         {
             try
             {
-                await Http.PostAsJsonAsync<CustomerModel>("api/customer", customerModel);
-                this.Toaster.Add("customer created successfully", MatToastType.Success, "Customer Creation");
+                if (customerModel.Id > 0)
+                {
+                    await Http.PutAsJsonAsync<CustomerModel>("api/customer", customerModel);
+                    this.Toaster.Add("customer updated successfully", MatToastType.Success, "Customer Update");
+                }
+                else
+                {
+                    await Http.PostAsJsonAsync<CustomerModel>("api/customer", customerModel);
+                    this.Toaster.Add("customer created successfully", MatToastType.Success, "Customer Creation");
+                }
                 this.dialogIsOpen = false;
                 await OnCustomerUpdated.InvokeAsync();
                 StateHasChanged();
@@ -59,6 +68,6 @@ namespace Blazor.Wasm.UI.Pages
             }
             ;
         }
-        
+
     }
 }

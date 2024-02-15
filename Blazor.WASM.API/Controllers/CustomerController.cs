@@ -23,7 +23,7 @@ namespace Blazor.WASM.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            var customers = await _context.Customers.FirstOrDefaultAsync(x=>x.Id==id);
+            var customers = await _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(customers);
         }
         [HttpPost]
@@ -33,11 +33,11 @@ namespace Blazor.WASM.API.Controllers
             await _context.SaveChangesAsync();
             return Ok(model);
         }
-        
+
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] Customer model)
         {
-            await _context.Customers.AddAsync(model);
+            _context.Customers.Update(model);
             await _context.SaveChangesAsync();
             return Ok(model);
         }
@@ -49,7 +49,7 @@ namespace Blazor.WASM.API.Controllers
             {
                 return NotFound();
             }
-             _context.Customers.Remove(customer);
+            _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
             return Ok();
         }

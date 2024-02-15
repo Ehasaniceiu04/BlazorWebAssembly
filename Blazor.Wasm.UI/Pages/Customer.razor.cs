@@ -29,12 +29,18 @@ namespace Blazor.Wasm.UI.Pages
         private CustomerEditDialog customerDialog;
         private void HandleCustomerCreate()
         {
-            customerDialog.OpenDialog();
+            customerDialog.OpenDialog(new CustomerModel());
         }
         private async Task HandleCustomerUpdated()
         {
             this.customers = await Http.GetFromJsonAsync<List<CustomerModel>>("api/Customer");
         }
+        private void OnHandleEdit(CustomerModel customer) {
+            customerDialog.OpenDialog(customer);
+        }
+
+
+
 
     }
 }
