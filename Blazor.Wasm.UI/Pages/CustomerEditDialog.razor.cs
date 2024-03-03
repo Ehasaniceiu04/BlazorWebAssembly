@@ -11,18 +11,25 @@ namespace Blazor.Wasm.UI.Pages
 {
     public partial class CustomerEditDialog
     {
-        [Parameter]
-        public EventCallback OnCustomerUpdated { get; set; }
+        [CascadingParameter]
+        public ThemeInfo ThemeInfo { get; set; }
 
-        bool dialogIsOpen = false;
+
         [Inject]
         private HttpClient Http { get; set; }
         [Inject]
         IMatToaster Toaster { get; set; }
 
+        [Parameter]
+        public  string Title { get; set; }
 
+        [Parameter]
+        public CustomerModel customerModel { get; set; }=new CustomerModel();
 
-        CustomerModel customerModel = new CustomerModel();
+        [CascadingParameter]
+        public MatDialogReference DialogReference { get; set; }
+
+        
 
         List<GenderModel> genders = new List<GenderModel>() {
             new GenderModel(){Id = 1, Name ="Male"},
@@ -37,12 +44,7 @@ namespace Blazor.Wasm.UI.Pages
              new CountryModel(){Id = 4, Name ="India"}
         };
 
-        public void OpenDialog(CustomerModel customer)
-        {
-            this.customerModel = customer;
-            dialogIsOpen = true;
-            StateHasChanged();
-        }
+       
 
         async void HandleValidSubmit()
         {
@@ -58,15 +60,18 @@ namespace Blazor.Wasm.UI.Pages
                     await Http.PostAsJsonAsync<CustomerModel>("api/customer", customerModel);
                     this.Toaster.Add("customer created successfully", MatToastType.Success, "Customer Creation");
                 }
-                this.dialogIsOpen = false;
-                await OnCustomerUpdated.InvokeAsync();
-                StateHasChanged();
+               this.DialogReference.Close(true);
+
             }
             catch (Exception ex)
             {
                 this.Toaster.Add(ex.Message, MatToastType.Danger, "Customer Creation");
             }
             ;
+        }
+
+        public void OnHandleClose() {
+            this.DialogReference.Close(false);
         }
 
     }

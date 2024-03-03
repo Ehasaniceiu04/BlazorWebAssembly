@@ -1,10 +1,17 @@
 ﻿@page "/counter"
+@using Blazor.Wasm.UI.Models
 
-<ChildCounter @ref="childCounter"></ChildCounter>
+<CascadingValue Value="ButtonClass">
+    <ChildCounter @ref="childCounter"></ChildCounter>
+</CascadingValue>
 
- <button type="button" class="btn btn-primary" @onclick="HandleClick" >Count</button>
+<button type="button" class="btn @ThemeInfo.SubmitButtonClass" @onclick="HandleClick">Count</button>
 
 @code {
+    [CascadingParameter(Name="Counter")]
+    public ThemeInfo ThemeInfo { get; set; }
+
+    public string ButtonClass => "btn-success";
 
     ChildCounter childCounter { get; set; }
 

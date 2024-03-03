@@ -1,7 +1,7 @@
 ﻿@page "/customers"
 <div class="d-flex">
     <h4 class="flex-grow-1">Customers</h4>
-    <button class="btn btn-primary" @onclick="HandleCustomerCreate">Create Customer</button>
+    <button class="btn @ThemeInfo.SubmitButtonClass" @onclick="HandleCustomerCreate">Create Customer</button>
 </div>
 <table class="table">
     <thead>
@@ -20,7 +20,7 @@
         } 
     </tbody>
 </table>
-<CustomerEditDialog @ref="customerDialog" OnCustomerUpdated="HandleCustomerUpdated"></CustomerEditDialog>
+
 
 
 

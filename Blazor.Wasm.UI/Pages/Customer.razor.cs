@@ -1,4 +1,5 @@
 ﻿using Blazor.Wasm.UI.Models;
+using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
@@ -7,7 +8,10 @@ namespace Blazor.Wasm.UI.Pages
 {
     public partial class Customer : ComponentBase
     {
-
+        [CascadingParameter]
+        public ThemeInfo ThemeInfo { get; set; }
+        [Inject]
+        private IMatDialogService MatDialogService { get; set; }
         List<CustomerModel> customers = new List<CustomerModel>();
 
         [Inject]
@@ -23,20 +27,30 @@ namespace Blazor.Wasm.UI.Pages
 
         private async Task Reload(int customerId)
         {
-            this.customers =customers.Where(x => x.Id != customerId).ToList();
+            this.customers = customers.Where(x => x.Id != customerId).ToList();
         }
 
-        private CustomerEditDialog customerDialog;
-        private void HandleCustomerCreate()
+
+        private async Task HandleCustomerCreate()
         {
-            customerDialog.OpenDialog(new CustomerModel());
+            MatDialogOptions options = new MatDialogOptions();
+            options.Attributes=new Dictionary<string, object>() { 
+                { "Title", "Create Customer" },
+                { "customerModel", new CustomerModel() }
+            };
+            var isCreated = await this.MatDialogService.OpenAsync(typeof(CustomerEditDialog), options);
+            if ((bool)isCreated)
+            {
+                this.customers = await Http.GetFromJsonAsync<List<CustomerModel>>("api/Customer");
+            }
         }
         private async Task HandleCustomerUpdated()
         {
             this.customers = await Http.GetFromJsonAsync<List<CustomerModel>>("api/Customer");
         }
-        private void OnHandleEdit(CustomerModel customer) {
-            customerDialog.OpenDialog(customer);
+        private void OnHandleEdit(CustomerModel customer)
+        {
+
         }
 
 

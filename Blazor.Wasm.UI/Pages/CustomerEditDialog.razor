@@ -1,8 +1,8 @@
 ﻿
 <EditForm Model="@customerModel" OnValidSubmit="@HandleValidSubmit" >
-<MatDialog @bind-IsOpen="@dialogIsOpen" Style="width:1200px !important">
+
         <DataAnnotationsValidator></DataAnnotationsValidator>
-        <MatDialogTitle>@(customerModel.Id == 0 ? "New Customer" : "Update Customer")</MatDialogTitle>
+        <MatDialogTitle>@Title</MatDialogTitle>
         <MatDialogContent>
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>
@@ -53,10 +53,10 @@
 
                 </InputSelect>
             </div>
-            <div class="mb-3">
+            @* <div class="mb-3">
                 <label for="country" class="form-label"> Address</label>
                 <textarea id="mailing" class="form-control" rows="3"></textarea>
-            </div>
+            </div> *@
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="isAgreeToGetPromotionalEmail" @bind-value="customerModel.IsSubscribedToNewsLetter">
                 <label class="form-check-label" for="isAgreeToGetPromotionalEmail">
@@ -67,9 +67,9 @@
 
         </MatDialogContent>
         <MatDialogActions>
-            <MatButton Type="button" OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <MatButton Type="button" OnClick="OnHandleClose">Cancel</MatButton>
+            <button type="submit" class="btn @ThemeInfo.SubmitButtonClass">Submit</button>
         </MatDialogActions>
-    </MatDialog> 
+
 </EditForm>
 

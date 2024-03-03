@@ -1,4 +1,5 @@
 using Blazor.Wasm.UI;
+using Blazor.Wasm.UI.Models;
 using MatBlazor;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -21,5 +22,11 @@ builder.Services.AddMatToaster(config =>
     config.MaximumOpacity = 95;
     config.VisibleStateDuration = 3000;
 });
+
+builder.Services.AddCascadingValue(x => new ThemeInfo("btn-primary", "btn-info", "btn-danger"));
+
+builder.Services.AddCascadingValue("Counter",x => new ThemeInfo("btn-primary", "btn-info", "btn-danger"));
+
+
 
 await builder.Build().RunAsync();

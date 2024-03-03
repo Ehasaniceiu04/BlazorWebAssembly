@@ -2,11 +2,14 @@
 using Blazor.Wasm.UI.Pages.Shared;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using System.Net.Http.Json;
 
 namespace Blazor.Wasm.UI.Pages
 {
     public partial class DisplayCustomer
     {
+        [CascadingParameter]
+        public ThemeInfo ThemeInfo { get; set; }
         [Parameter]
         public EventCallback<int> OnDelete { get; set; }
 
@@ -62,8 +65,18 @@ namespace Blazor.Wasm.UI.Pages
             }
 
         }
-        private  async Task OnHandleEdit(CustomerModel customer) { 
-             await OnEdit.InvokeAsync(customer);
+        private  async Task OnHandleEdit(CustomerModel customer) {
+            MatDialogOptions options = new MatDialogOptions();
+            options.Attributes = new Dictionary<string, object>() {
+                { "Title", "Update Customer" },
+                { "customerModel", customer}
+            };
+            var isEdited = await this.MatDialogService.OpenAsync(typeof(CustomerEditDialog), options);
+            if ((bool)isEdited)
+            {
+                await OnEdit.InvokeAsync(customer);
+            }
+            
         }
 
 
