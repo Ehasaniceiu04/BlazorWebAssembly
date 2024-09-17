@@ -1,4 +1,3 @@
-
 trigger:
 - main
 
@@ -19,3 +18,9 @@ steps:
 - script: dotnet publish -o $(build.artifactStagingDirectory)
   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
   workingDirectory: $(System.DefaultWorkingDirectory)
+
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
