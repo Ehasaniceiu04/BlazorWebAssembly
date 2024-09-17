@@ -6,6 +6,12 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: pwd
+  displayName: 'What directory we are in ?'
+
+- script: ls -la
+  displayName: 'What files are in this folder?'
+
 - script: dotnet build
   displayName: 'dotnet build'
 
