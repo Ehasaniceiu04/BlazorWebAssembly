@@ -14,6 +14,7 @@ steps:
 
 - script: dotnet build
   displayName: 'dotnet build'
+  workingDirectory: $(solutionDir)
 
 - script: dotnet publish -o $(build.artifactStagingDirectory)
   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
